@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ChatApplication</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ChatApplication.styles.css" asp-append-version="true" />
+</head>
+<body>
+    
+    <div class="navbar">
+
+        <a asp-controller="Home" asp-action="Index">Home</a>
+        <a asp-controller="Home" asp-action="Find">Find New Users</a>
+        <a asp-controller="Home" asp-action="Private">Private Chats</a>
+        <a asp-controller="Home" asp-action="OnlineUsers">Online Users</a>
+        <a asp-controller="Account" asp-action="LogOut">Log Out</a>
+
+    </div>
+
+
+    <div class="main">
+
+        @if(User.Identity.IsAuthenticated)
+        {
+            @await Component.InvokeAsync("Room")
+        }
+
+        <div class="chat">
+
+            @RenderBody()
+
+        </div>
+
+
+    </div>
+
+    <div class="modal" id="create-room-modal">
+
+        <form asp-controller="Home" asp-action="CreateRoom" class="modal-body">
+
+            <button type="button" class="close" onclick="closeModal()">
+                X
+            </button>
+
+            <header>
+                Create Room
+            </header>
+
+            <div>
+                <input name="name"/>
+            </div>
+
+            <footer>
+                <button>
+                    Create
+                </button>
+            </footer>
+
+        </form>
+    </div>
+
+   
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/signalr.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @* <script>
+        window.addEventListener("beforeunload", (e) => {
+            e.preventDefault()
+            console.log("I am the 2nd one.");
+        });
+        // window.onclose = function(){
+
+        // }
+    </script> *@
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+﻿@model IEnumerable<User>
+
+<div class="user-cards">
+
+    @foreach (var user in Model)
+    {
+        <div class="user-card">
+            <a asp-controller="Home" asp-action="CreatePrivateRoom"
+               asp-route-userId="@user.Id">
+                @user.UserName
+            </a>
+        </div>
+    }
+
+</div>

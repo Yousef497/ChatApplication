@@ -1,0 +1,35 @@
+﻿<div class="login">
+
+    <form asp-controller="Account" asp-action="Login">
+
+        <div class="loin-inputs">
+            <input type="text" name="username" placeholder="User Name" />
+        </div>
+
+        <div class="login-input">
+            <input type="password" name="password" placeholder="Password" />
+        </div>
+
+        <br class="space" />
+        <div class="login-btns">
+
+            <button asp-controller="Account" asp-action="Register"
+                    width="82" height="37" class="btn btn-primary"
+                    style="background-color:mediumseagreen">
+
+                Register
+            </button>
+
+            <button asp-controller="Account" asp-action="Login"
+                    width="82" height="37" class="btn btn-primary"
+                    style="background-color:mediumseagreen">
+
+                Login
+            </button>
+        </div>
+
+
+    </form>
+</div>
+
+

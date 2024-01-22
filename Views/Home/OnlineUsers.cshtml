@@ -1,0 +1,39 @@
+﻿@model IEnumerable<User>
+
+<div class="user-cards">
+
+    @foreach (var user in Model)
+    {
+        <div class="user-card">
+            <a asp-controller="Home" asp-action="CreatePrivateRoom"
+               asp-route-userId="@user.Id">
+                @user.UserName
+            </a>
+        </div>
+    }
+
+</div>
+
+@section Scripts {
+    <script>
+        const hubConnection = new signalR.HubConnectionBuilder()
+            .withUrl("/connectedUsersHub")
+            .build();
+
+        hubConnection.start().then(() => {
+            console.log("Connected to SignalR Hub");
+        }).catch(err => console.error(err));
+
+        hubConnection.on("ReceiveUpdate", () => {
+            console.log("Received update from SignalR Hub");
+            refreshView();
+        });
+
+        function refreshView() {
+            // Fetch updated data from the server or perform any other necessary update logic
+            // For simplicity, just reload the page
+            location.reload();
+        }
+    </script>
+}
+
